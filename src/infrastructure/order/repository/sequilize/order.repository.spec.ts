@@ -121,4 +121,7 @@ describe("Order repository test", () => {
       ],
     });
   });
+  it("should find an order", async () => {});
+  it("should throw an error when order is not found", async () => {});
+  it("should find all orders", async () => {});
 });

@@ -136,4 +136,19 @@ describe("Order repository test", () => {
       "Order not found"
     );
   });
+  it("should find all orders", async () => {
+    const { order, orderRepository } = await makeSut();
+    await orderRepository.create(order);
+
+    const orders = await orderRepository.findAll();
+
+    expect(orders).toStrictEqual([order]);
+  });
+  it("should return a empty array if there is no orders", async () => {
+    const { orderRepository } = await makeSut();
+
+    const orders = await orderRepository.findAll();
+
+    expect(orders).toStrictEqual([]);
+  });
 });

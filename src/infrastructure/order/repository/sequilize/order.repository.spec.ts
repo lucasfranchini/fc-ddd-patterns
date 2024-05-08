@@ -121,7 +121,19 @@ describe("Order repository test", () => {
       ],
     });
   });
-  it("should find an order", async () => {});
-  it("should throw an error when order is not found", async () => {});
-  it("should find all orders", async () => {});
+  it("should find an order", async () => {
+    const { order, orderRepository } = await makeSut();
+    await orderRepository.create(order);
+
+    const foundOrder = await orderRepository.find(order.id);
+
+    expect(foundOrder).toStrictEqual(order);
+  });
+  it("should throw an error when order is not found", async () => {
+    const { orderRepository } = await makeSut();
+
+    await expect(orderRepository.find("123")).rejects.toThrow(
+      "Order not found"
+    );
+  });
 });
